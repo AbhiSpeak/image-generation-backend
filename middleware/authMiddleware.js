@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const asyncHandler = require("express-async-handler");
-const User = require("../mongodb/models/user");
-const generateToken = require("../utils/tokenGeneration");
+import jwt from "jsonwebtoken";
+import asyncHandler from "express-async-handler";
+import { User } from "../mongodb/models/user.js";
+import { generateToken } from "../utils/tokenGeneration.js";
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -20,10 +20,10 @@ const protect = asyncHandler(async (req, res, next) => {
       throw new Error("Not authorized, token failed");
     }
 
-    if(!token){
-        throw new Error("Not authorized, No Token!")
+    if (!token) {
+      throw new Error("Not authorized, No Token!");
     }
   }
 });
 
-module.exports = generateToken
+export { protect };
